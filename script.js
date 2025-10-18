@@ -1,27 +1,26 @@
-// Display elements
-const latSpan = document.getElementById("latitude");
-const lonSpan = document.getElementById("longitude");
-const accSpan = document.getElementById("accuracy");
-
-// --- Tab Switching ---
-document.querySelectorAll(".tab-btn").forEach(btn => {
+// Tabs
+document.querySelectorAll(".tab-btn").forEach((btn) => {
   btn.addEventListener("click", () => {
     document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
-    document.querySelectorAll(".tab-content").forEach(tab => tab.classList.remove("active"));
+    document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
     btn.classList.add("active");
     document.getElementById(btn.dataset.tab).classList.add("active");
   });
 });
 
-// --- Update Display ---
+// Geolocation Logic
+const latSpan = document.getElementById("latitude");
+const lonSpan = document.getElementById("longitude");
+const accSpan = document.getElementById("accuracy");
+
 function updateDisplay(lat, lon, acc = 15) {
   latSpan.textContent = lat.toFixed(5);
   lonSpan.textContent = lon.toFixed(5);
   accSpan.textContent = acc;
-  console.log(`✅ Mocked Location -> Lat: ${lat}, Lon: ${lon}`);
+  console.log(`✅ Mocked Location -> Lat: ${lat}, Lon: ${lon}, Accuracy: ${acc}m`);
 }
 
-// --- Preset Buttons ---
+// Preset Buttons
 document.querySelectorAll(".buttons button").forEach(btn => {
   btn.addEventListener("click", () => {
     const lat = parseFloat(btn.dataset.lat);
@@ -30,7 +29,7 @@ document.querySelectorAll(".buttons button").forEach(btn => {
   });
 });
 
-// --- Manual Input ---
+// Manual Input
 document.getElementById("manual-btn").addEventListener("click", () => {
   const lat = parseFloat(document.getElementById("manual-latitude").value);
   const lon = parseFloat(document.getElementById("manual-longitude").value);
@@ -38,15 +37,15 @@ document.getElementById("manual-btn").addEventListener("click", () => {
   mockLocation(lat, lon);
 });
 
-// --- Override getCurrentPosition ---
+// Override getCurrentPosition
 document.getElementById("override-btn").addEventListener("click", () => {
-  navigator.geolocation.getCurrentPosition = success => {
+  navigator.geolocation.getCurrentPosition = (success) => {
     success({ coords: { latitude: 37.7749, longitude: -122.4194, accuracy: 10 } });
   };
-  alert("✅ getCurrentPosition overridden globally (San Francisco)");
+  alert("✅ getCurrentPosition overridden (San Francisco)");
 });
 
-// --- Simulate watchPosition ---
+// Simulate watchPosition
 document.getElementById("watch-btn").addEventListener("click", () => {
   let lat = 37.7749, lon = -122.4194;
   alert("📡 Simulating continuous updates...");
@@ -57,15 +56,15 @@ document.getElementById("watch-btn").addEventListener("click", () => {
   }, 2000);
 });
 
-// --- Mock Helper ---
+// Helper
 function mockLocation(lat, lon) {
   updateDisplay(lat, lon);
-  navigator.geolocation.getCurrentPosition = success => {
+  navigator.geolocation.getCurrentPosition = (success) => {
     success({ coords: { latitude: lat, longitude: lon, accuracy: 15 } });
   };
 }
 
-// --- Copy Console Code ---
+// Copy Console Code
 document.getElementById("copy-btn").addEventListener("click", () => {
   const code = document.getElementById("console-code").innerText;
   navigator.clipboard.writeText(code).then(() => {
