@@ -1,16 +1,28 @@
+// Display elements
 const latSpan = document.getElementById("latitude");
 const lonSpan = document.getElementById("longitude");
 const accSpan = document.getElementById("accuracy");
 
+// --- Tab Switching ---
+document.querySelectorAll(".tab-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(".tab-content").forEach(tab => tab.classList.remove("active"));
+    btn.classList.add("active");
+    document.getElementById(btn.dataset.tab).classList.add("active");
+  });
+});
+
+// --- Update Display ---
 function updateDisplay(lat, lon, acc = 15) {
   latSpan.textContent = lat.toFixed(5);
   lonSpan.textContent = lon.toFixed(5);
   accSpan.textContent = acc;
-  console.log(`✅ Mocked Location -> Latitude: ${lat}, Longitude: ${lon}, Accuracy: ${acc}m`);
+  console.log(`✅ Mocked Location -> Lat: ${lat}, Lon: ${lon}`);
 }
 
 // --- Preset Buttons ---
-document.querySelectorAll(".buttons button").forEach((btn) => {
+document.querySelectorAll(".buttons button").forEach(btn => {
   btn.addEventListener("click", () => {
     const lat = parseFloat(btn.dataset.lat);
     const lon = parseFloat(btn.dataset.lon);
@@ -22,45 +34,43 @@ document.querySelectorAll(".buttons button").forEach((btn) => {
 document.getElementById("manual-btn").addEventListener("click", () => {
   const lat = parseFloat(document.getElementById("manual-latitude").value);
   const lon = parseFloat(document.getElementById("manual-longitude").value);
-  if (isNaN(lat) || isNaN(lon)) return alert("⚠️ Please enter valid coordinates!");
+  if (isNaN(lat) || isNaN(lon)) return alert("⚠️ Enter valid coordinates!");
   mockLocation(lat, lon);
 });
 
-// --- getCurrentPosition Override ---
+// --- Override getCurrentPosition ---
 document.getElementById("override-btn").addEventListener("click", () => {
-  navigator.geolocation.getCurrentPosition = function (success) {
-    success({
-      coords: { latitude: 37.7749, longitude: -122.4194, accuracy: 10 },
-    });
+  navigator.geolocation.getCurrentPosition = success => {
+    success({ coords: { latitude: 37.7749, longitude: -122.4194, accuracy: 10 } });
   };
-  alert("✅ getCurrentPosition() overridden globally (San Francisco).");
+  alert("✅ getCurrentPosition overridden globally (San Francisco)");
 });
 
-// --- watchPosition Simulation ---
+// --- Simulate watchPosition ---
 document.getElementById("watch-btn").addEventListener("click", () => {
   let lat = 37.7749, lon = -122.4194;
-  const interval = setInterval(() => {
+  alert("📡 Simulating continuous updates...");
+  setInterval(() => {
     lat += (Math.random() - 0.5) * 0.001;
     lon += (Math.random() - 0.5) * 0.001;
     updateDisplay(lat, lon);
   }, 2000);
-  alert("📡 Simulating continuous position updates...");
 });
 
 // --- Mock Helper ---
 function mockLocation(lat, lon) {
   updateDisplay(lat, lon);
-  navigator.geolocation.getCurrentPosition = (success) => {
+  navigator.geolocation.getCurrentPosition = success => {
     success({ coords: { latitude: lat, longitude: lon, accuracy: 15 } });
   };
 }
 
 // --- Copy Console Code ---
-const copyBtn = document.getElementById("copy-btn");
-copyBtn.addEventListener("click", () => {
+document.getElementById("copy-btn").addEventListener("click", () => {
   const code = document.getElementById("console-code").innerText;
   navigator.clipboard.writeText(code).then(() => {
-    copyBtn.textContent = "✅ Copied!";
-    setTimeout(() => (copyBtn.textContent = "📋 Copy Code"), 1500);
+    const btn = document.getElementById("copy-btn");
+    btn.textContent = "✅ Copied!";
+    setTimeout(() => (btn.textContent = "📋 Copy Code"), 1500);
   });
 });
