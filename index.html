@@ -9,44 +9,53 @@
 <body>
   <div class="container">
     <h1>🌸 Geolocation Mocking Toolkit</h1>
-    <p>Simulate any GPS location in your browser for testing or development.</p>
+    <p>Mock, simulate, and override your browser’s location easily.</p>
 
-    <div class="buttons">
-      <button data-lat="35.6895" data-lon="139.6917">🇯🇵 Japan (Tokyo)</button>
-      <button data-lat="43.6532" data-lon="-79.3832">🇨🇦 Canada (Toronto)</button>
-      <button data-lat="52.5200" data-lon="13.4050">🇩🇪 Germany (Berlin)</button>
-      <button data-lat="1.3521" data-lon="103.8198">🇸🇬 Singapore</button>
-      <button data-lat="36.1699" data-lon="-115.1398">🇺🇸 Las Vegas</button>
-      <button id="override-btn">⚙️ Override getCurrentPosition()</button>
-      <button id="watch-btn">📡 Simulate watchPosition()</button>
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="presets">🌍 Presets</button>
+      <button class="tab-btn" data-tab="manual">🧭 Manual</button>
+      <button class="tab-btn" data-tab="devtools">💻 DevTools</button>
     </div>
 
-    <div class="manual-input">
-      <h2>🧭 Manually Set Location</h2>
-      <label for="manual-latitude">Latitude:</label>
+    <div id="presets" class="tab-content active">
+      <h2>🌍 Preset Locations</h2>
+      <div class="buttons">
+        <button data-lat="35.6895" data-lon="139.6917">🇯🇵 Tokyo</button>
+        <button data-lat="43.6532" data-lon="-79.3832">🇨🇦 Toronto</button>
+        <button data-lat="52.5200" data-lon="13.4050">🇩🇪 Berlin</button>
+        <button data-lat="1.3521" data-lon="103.8198">🇸🇬 Singapore</button>
+        <button data-lat="36.1699" data-lon="-115.1398">🇺🇸 Las Vegas</button>
+      </div>
+      <button id="override-btn">⚙️ Override getCurrentPosition()</button>
+      <button id="watch-btn">📡 Simulate watchPosition()</button>
+
+      <div id="output">
+        <h2>📍 Simulated Location</h2>
+        <p>Latitude: <span id="latitude">--</span></p>
+        <p>Longitude: <span id="longitude">--</span></p>
+        <p>Accuracy: <span id="accuracy">--</span> m</p>
+      </div>
+    </div>
+
+    <div id="manual" class="tab-content">
+      <h2>🧭 Manually Set Coordinates</h2>
+      <label>Latitude:</label>
       <input type="number" id="manual-latitude" placeholder="Enter Latitude" />
-      <label for="manual-longitude">Longitude:</label>
+      <label>Longitude:</label>
       <input type="number" id="manual-longitude" placeholder="Enter Longitude" />
       <button id="manual-btn">Set Location</button>
     </div>
 
-    <div id="output">
-      <h2>📍 Simulated Location</h2>
-      <p>Latitude: <span id="latitude">--</span></p>
-      <p>Longitude: <span id="longitude">--</span></p>
-      <p>Accuracy: <span id="accuracy">--</span> m</p>
-    </div>
-
-    <div class="instructions">
-      <h2>💻 DevTools Geolocation Mocking</h2>
+    <div id="devtools" class="tab-content">
+      <h2>💻 DevTools & Console</h2>
       <ul>
-        <li>Press <strong>Shift + Ctrl + I</strong> (or <strong>Cmd + Option + I</strong> on Mac) to open Developer Tools.</li>
-        <li>Press <strong>Shift + Ctrl + P</strong> to open the Command Menu.</li>
-        <li>Type <code>sensors</code> and hit <strong>Enter</strong> to open the Sensors tab.</li>
-        <li>Scroll to “Geolocation” and pick a preset or custom location.</li>
+        <li><strong>Shift + Ctrl + I</strong> → Open Developer Tools</li>
+        <li><strong>Shift + Ctrl + P</strong> → Command Menu</li>
+        <li>Type <code>sensors</code> → Press Enter</li>
+        <li>Choose your custom geolocation</li>
       </ul>
 
-      <h3>📜 Console Mocking Code:</h3>
+      <h3>Console Mocking Code:</h3>
       <pre><code id="console-code">
 navigator.geolocation.getCurrentPosition = function(success) {
   success({
@@ -59,7 +68,7 @@ navigator.geolocation.getCurrentPosition = function(success) {
 };
 console.log("✅ Geolocation overridden to San Francisco");
       </code></pre>
-      <button id="copy-btn">📋 Copy Console Code</button>
+      <button id="copy-btn">📋 Copy Code</button>
     </div>
   </div>
 
