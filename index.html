@@ -1,53 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Geolocation Mocking - Multiple Methods</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🌍 Geolocation Mocking Toolkit</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="container">
-    <h1>Geolocation Mocking Methods</h1>
-    <p>Select a location to simulate:</p>
+    <h1>🌍 Geolocation Mocking Toolkit</h1>
+    <p>Select or create a simulated location below:</p>
+
     <div class="buttons">
-      <button id="japan-btn">Japan (Tokyo)</button>
-      <button id="canada-btn">Canada (Toronto)</button>
-      <button id="germany-btn">Germany (Berlin)</button>
-      <button id="singapore-btn">Singapore</button>
-      <button id="lasvegas-btn">Las Vegas, USA</button>
-      <button id="override-btn">Override `getCurrentPosition`</button>
-      <button id="watch-btn">Override `watchPosition`</button>
+      <button data-lat="35.6895" data-lon="139.6917">🇯🇵 Japan (Tokyo)</button>
+      <button data-lat="43.6532" data-lon="-79.3832">🇨🇦 Canada (Toronto)</button>
+      <button data-lat="52.5200" data-lon="13.4050">🇩🇪 Germany (Berlin)</button>
+      <button data-lat="1.3521" data-lon="103.8198">🇸🇬 Singapore</button>
+      <button data-lat="36.1699" data-lon="-115.1398">🇺🇸 Las Vegas</button>
+    </div>
+
+    <div class="actions">
+      <button id="override-btn">⚙️ Override getCurrentPosition()</button>
+      <button id="watch-btn">📡 Simulate watchPosition()</button>
     </div>
 
     <div class="manual-input">
-      <h2>Manually Set Location</h2>
-      <label for="manual-latitude">Latitude:</label>
-      <input type="number" id="manual-latitude" placeholder="Enter Latitude" />
-      <label for="manual-longitude">Longitude:</label>
-      <input type="number" id="manual-longitude" placeholder="Enter Longitude" />
-      <button id="manual-btn">Set Location Manually</button>
+      <h2>🧭 Manually Set Location</h2>
+      <div class="input-group">
+        <input type="number" id="manual-latitude" placeholder="Latitude (e.g. 37.7749)" />
+        <input type="number" id="manual-longitude" placeholder="Longitude (e.g. -122.4194)" />
+        <button id="manual-btn">Set Location</button>
+      </div>
     </div>
 
-    <div id="output">
-      <h2>Simulated Location:</h2>
+    <div id="output" class="output">
+      <h2>📍 Simulated Location</h2>
       <p>Latitude: <span id="latitude">--</span></p>
       <p>Longitude: <span id="longitude">--</span></p>
-      <p>Accuracy: <span id="accuracy">--</span></p>
+      <p>Accuracy: <span id="accuracy">--</span> meters</p>
+    </div>
+
+    <div class="tutorial">
+      <h2>🧑‍💻 How to Use DevTools to Mock Location</h2>
+      <ol>
+        <li>Press <kbd>Shift</kbd> + <kbd>Ctrl</kbd> + <kbd>I</kbd> (or <kbd>Cmd</kbd> + <kbd>Option</kbd> + <kbd>I</kbd> on Mac) to open <strong>Developer Tools</strong>.</li>
+        <li>Press <kbd>Shift</kbd> + <kbd>Ctrl</kbd> + <kbd>P</kbd> to open the <strong>Command Menu</strong>.</li>
+        <li>Type <code>sensors</code> and hit <kbd>Enter</kbd>.</li>
+        <li>Scroll to the bottom panel → Select a predefined location or choose “Custom location.”</li>
+      </ol>
+      <p>💡 You can also use the <strong>Console</strong> tab to manually mock the geolocation API with the code below.</p>
+
+      <div class="console-snippet">
+        <pre><code id="console-code">
+// Mock getCurrentPosition
+navigator.geolocation.getCurrentPosition = function(success) {
+  success({
+    coords: {
+      latitude: 37.7749,
+      longitude: -122.4194,
+      accuracy: 10
+    }
+  });
+};
+console.log("✅ Geolocation overridden to San Francisco");
+        </code></pre>
+        <button id="copy-btn">📋 Copy Code</button>
+      </div>
     </div>
 
     <div class="instructions">
-      <h3>How to use the Methods:</h3>
+      <h3>🧠 Tips & Tricks</h3>
       <ul>
-        <li>Click on a location button to simulate `getCurrentPosition()` for a specific city.</li>
-        <li>Click "Override `getCurrentPosition`" to globally mock `getCurrentPosition` to return a fixed location.</li>
-        <li>Click "Override `watchPosition`" to simulate continuous location updates.</li>
-        <li>Use the "Manually Set Location" section to input a custom latitude and longitude.</li>
+        <li>Use the “Sensors” tab to emulate any city.</li>
+        <li>Use manual input for your own coordinates.</li>
+        <li>Override <code>getCurrentPosition()</code> globally with one click.</li>
       </ul>
-      <p>**Important:** If you're using **DevTools Sensors**, you must enable the "Sensors" tab in Chrome DevTools to simulate geolocation.</p>
     </div>
   </div>
-  
+
   <script src="script.js"></script>
 </body>
 </html>
