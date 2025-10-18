@@ -7,52 +7,68 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>🌍 Geolocation Mocking Toolkit</h1>
-    <p>Select or create a simulated location below:</p>
+  <header>
+    <div class="logo">🌍 GeoMock</div>
+    <nav>
+      <a href="#locations">Locations</a>
+      <a href="#manual">Manual</a>
+      <a href="#tutorial">DevTools</a>
+    </nav>
+  </header>
 
-    <div class="buttons">
-      <button data-lat="35.6895" data-lon="139.6917">🇯🇵 Japan (Tokyo)</button>
-      <button data-lat="43.6532" data-lon="-79.3832">🇨🇦 Canada (Toronto)</button>
-      <button data-lat="52.5200" data-lon="13.4050">🇩🇪 Germany (Berlin)</button>
-      <button data-lat="1.3521" data-lon="103.8198">🇸🇬 Singapore</button>
-      <button data-lat="36.1699" data-lon="-115.1398">🇺🇸 Las Vegas</button>
-    </div>
+  <section class="hero">
+    <h1>Geolocation Mocking Toolkit</h1>
+    <p>Simulate any GPS location directly in your browser using multiple methods — perfect for testing, development, or demos.</p>
+    <button id="get-started">🚀 Get Started</button>
+  </section>
 
-    <div class="actions">
-      <button id="override-btn">⚙️ Override getCurrentPosition()</button>
-      <button id="watch-btn">📡 Simulate watchPosition()</button>
-    </div>
+  <main>
+    <section id="locations" class="card">
+      <h2>🌏 Choose a Predefined Location</h2>
+      <p>Click any city to instantly simulate its coordinates:</p>
+      <div class="buttons">
+        <button data-lat="35.6895" data-lon="139.6917">🇯🇵 Tokyo</button>
+        <button data-lat="43.6532" data-lon="-79.3832">🇨🇦 Toronto</button>
+        <button data-lat="52.5200" data-lon="13.4050">🇩🇪 Berlin</button>
+        <button data-lat="1.3521" data-lon="103.8198">🇸🇬 Singapore</button>
+        <button data-lat="36.1699" data-lon="-115.1398">🇺🇸 Las Vegas</button>
+      </div>
+      <div class="actions">
+        <button id="override-btn">⚙️ Override getCurrentPosition()</button>
+        <button id="watch-btn">📡 Simulate watchPosition()</button>
+      </div>
+    </section>
 
-    <div class="manual-input">
-      <h2>🧭 Manually Set Location</h2>
+    <section id="manual" class="card">
+      <h2>🧭 Manually Set Custom Coordinates</h2>
+      <p>Enter your own latitude and longitude:</p>
       <div class="input-group">
-        <input type="number" id="manual-latitude" placeholder="Latitude (e.g. 37.7749)" />
-        <input type="number" id="manual-longitude" placeholder="Longitude (e.g. -122.4194)" />
+        <input type="number" id="manual-latitude" placeholder="Latitude" />
+        <input type="number" id="manual-longitude" placeholder="Longitude" />
         <button id="manual-btn">Set Location</button>
       </div>
-    </div>
+      <div id="output" class="output">
+        <h3>📍 Current Mock Location</h3>
+        <p>Latitude: <span id="latitude">--</span></p>
+        <p>Longitude: <span id="longitude">--</span></p>
+        <p>Accuracy: <span id="accuracy">--</span> meters</p>
+      </div>
+    </section>
 
-    <div id="output" class="output">
-      <h2>📍 Simulated Location</h2>
-      <p>Latitude: <span id="latitude">--</span></p>
-      <p>Longitude: <span id="longitude">--</span></p>
-      <p>Accuracy: <span id="accuracy">--</span> meters</p>
-    </div>
+    <section id="tutorial" class="card">
+      <h2>🧑‍💻 DevTools & Console Mocking</h2>
+      <p>Learn how to manually emulate location using browser tools.</p>
 
-    <div class="tutorial">
-      <h2>🧑‍💻 How to Use DevTools to Mock Location</h2>
       <ol>
-        <li>Press <kbd>Shift</kbd> + <kbd>Ctrl</kbd> + <kbd>I</kbd> (or <kbd>Cmd</kbd> + <kbd>Option</kbd> + <kbd>I</kbd> on Mac) to open <strong>Developer Tools</strong>.</li>
-        <li>Press <kbd>Shift</kbd> + <kbd>Ctrl</kbd> + <kbd>P</kbd> to open the <strong>Command Menu</strong>.</li>
-        <li>Type <code>sensors</code> and hit <kbd>Enter</kbd>.</li>
-        <li>Scroll to the bottom panel → Select a predefined location or choose “Custom location.”</li>
+        <li>Press <kbd>Shift</kbd> + <kbd>Ctrl</kbd> + <kbd>I</kbd> (or <kbd>Cmd</kbd> + <kbd>Option</kbd> + <kbd>I</kbd> on Mac) to open Developer Tools.</li>
+        <li>Press <kbd>Shift</kbd> + <kbd>Ctrl</kbd> + <kbd>P</kbd> to open the Command Menu.</li>
+        <li>Type <code>sensors</code> → hit <kbd>Enter</kbd> → choose your location.</li>
       </ol>
-      <p>💡 You can also use the <strong>Console</strong> tab to manually mock the geolocation API with the code below.</p>
+
+      <p>Or run this directly in your <strong>Console</strong> tab:</p>
 
       <div class="console-snippet">
         <pre><code id="console-code">
-// Mock getCurrentPosition
 navigator.geolocation.getCurrentPosition = function(success) {
   success({
     coords: {
@@ -66,17 +82,12 @@ console.log("✅ Geolocation overridden to San Francisco");
         </code></pre>
         <button id="copy-btn">📋 Copy Code</button>
       </div>
-    </div>
+    </section>
+  </main>
 
-    <div class="instructions">
-      <h3>🧠 Tips & Tricks</h3>
-      <ul>
-        <li>Use the “Sensors” tab to emulate any city.</li>
-        <li>Use manual input for your own coordinates.</li>
-        <li>Override <code>getCurrentPosition()</code> globally with one click.</li>
-      </ul>
-    </div>
-  </div>
+  <footer>
+    <p>⚡ Built for developers by <strong>HitBoyXx23</strong> — Modern Web Utility Toolkit</p>
+  </footer>
 
   <script src="script.js"></script>
 </body>
