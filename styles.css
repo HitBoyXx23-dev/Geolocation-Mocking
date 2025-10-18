@@ -2,7 +2,7 @@
 
 body {
   font-family: Arial, sans-serif;
-  background: #1e1e1e;
+  background-color: #1e1e1e;
   color: white;
   display: flex;
   justify-content: center;
@@ -19,14 +19,14 @@ body {
   width: 100%;
   max-width: 360px;
   text-align: center;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.3);
 }
 
 /* Tabs */
 .tabs {
   display: flex;
   justify-content: space-between;
-  margin-top: 15px;
+  margin: 15px 0;
   background: #3a3a3a;
   border-radius: 8px;
   overflow: hidden;
@@ -48,14 +48,18 @@ body {
   color: #fff;
 }
 
+/* Tab Content */
 .tab-content {
   display: none;
-  margin-top: 15px;
   text-align: left;
+  animation: fade 0.3s ease;
 }
 
-.tab-content.active {
-  display: block;
+.tab-content.active { display: block; }
+
+@keyframes fade {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 h1 {
@@ -66,7 +70,7 @@ h1 {
 h2 {
   color: #f4c7d7;
   font-size: 15px;
-  margin-top: 10px;
+  margin-top: 8px;
 }
 
 p, label, li {
@@ -86,9 +90,7 @@ button {
   transition: 0.25s;
 }
 
-button:hover {
-  background-color: #5e257a;
-}
+button:hover { background-color: #5e257a; }
 
 input {
   background: #333;
@@ -102,7 +104,7 @@ input {
 }
 
 #output {
-  margin-top: 15px;
+  margin-top: 12px;
   background: #1e1e1e;
   border: 1px solid #f4c7d7;
   border-radius: 8px;
