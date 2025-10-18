@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geolocation Mocking - Multiple Methods</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Geolocation Mocking Methods</h1>
+    <p>Select a location to simulate:</p>
+    <div class="buttons">
+      <button id="japan-btn">Japan (Tokyo)</button>
+      <button id="canada-btn">Canada (Toronto)</button>
+      <button id="germany-btn">Germany (Berlin)</button>
+      <button id="singapore-btn">Singapore</button>
+      <button id="lasvegas-btn">Las Vegas, USA</button>
+      <button id="override-btn">Override `getCurrentPosition`</button>
+      <button id="watch-btn">Override `watchPosition`</button>
+    </div>
+    <div id="output">
+      <h2>Simulated Location:</h2>
+      <p>Latitude: <span id="latitude">--</span></p>
+      <p>Longitude: <span id="longitude">--</span></p>
+      <p>Accuracy: <span id="accuracy">--</span></p>
+    </div>
+
+    <div class="instructions">
+      <h3>How to use the Methods:</h3>
+      <ul>
+        <li>Click on a location button to simulate `getCurrentPosition()` for a specific city.</li>
+        <li>Click "Override `getCurrentPosition`" to globally mock `getCurrentPosition` to return a fixed location.</li>
+        <li>Click "Override `watchPosition`" to simulate continuous location updates.</li>
+      </ul>
+      <p>**Important:** If you're using **DevTools Sensors**, you must enable the "Sensors" tab in Chrome DevTools to simulate geolocation.</p>
+    </div>
+  </div>
+  
+  <script src="script.js"></script>
+</body>
+</html>
