@@ -19,6 +19,16 @@
       <button id="override-btn">Override `getCurrentPosition`</button>
       <button id="watch-btn">Override `watchPosition`</button>
     </div>
+
+    <div class="manual-input">
+      <h2>Manually Set Location</h2>
+      <label for="manual-latitude">Latitude:</label>
+      <input type="number" id="manual-latitude" placeholder="Enter Latitude" />
+      <label for="manual-longitude">Longitude:</label>
+      <input type="number" id="manual-longitude" placeholder="Enter Longitude" />
+      <button id="manual-btn">Set Location Manually</button>
+    </div>
+
     <div id="output">
       <h2>Simulated Location:</h2>
       <p>Latitude: <span id="latitude">--</span></p>
@@ -32,6 +42,7 @@
         <li>Click on a location button to simulate `getCurrentPosition()` for a specific city.</li>
         <li>Click "Override `getCurrentPosition`" to globally mock `getCurrentPosition` to return a fixed location.</li>
         <li>Click "Override `watchPosition`" to simulate continuous location updates.</li>
+        <li>Use the "Manually Set Location" section to input a custom latitude and longitude.</li>
       </ul>
       <p>**Important:** If you're using **DevTools Sensors**, you must enable the "Sensors" tab in Chrome DevTools to simulate geolocation.</p>
     </div>
