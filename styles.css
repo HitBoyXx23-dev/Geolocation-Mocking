@@ -6,52 +6,58 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #1e1e1e; /* Black background */
+  background-color: #1e1e1e;
   color: white;
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
-  padding: 20px;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 40px 20px;
 }
 
 .container {
-  background: #2d2d2d; /* Darker background for container */
+  background: #2d2d2d;
   padding: 30px;
   border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  width: 400px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 420px;
   text-align: center;
+  border: 1px solid #f4c7d7;
 }
 
 h1 {
-  color: #f4c7d7; /* Sakura pink color */
+  color: #f4c7d7;
   font-size: 24px;
+  margin-bottom: 10px;
 }
 
 h2 {
-  color: #f4c7d7; /* Sakura pink */
+  color: #f4c7d7;
   margin-top: 20px;
+  margin-bottom: 8px;
 }
 
 p {
-  color: #b3b3b3; /* Light gray for text */
+  color: #b3b3b3;
+  font-size: 15px;
+  margin-top: 5px;
 }
 
 button {
   padding: 12px 16px;
-  font-size: 16px;
+  font-size: 15px;
   cursor: pointer;
   border: none;
   border-radius: 8px;
-  background-color: #8a3f96; /* Purple */
+  background-color: #8a3f96;
   color: white;
-  transition: background-color 0.3s;
-  margin-top: 10px;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
 button:hover {
-  background-color: #5e257a; /* Darker purple */
+  background-color: #5e257a;
+  transform: translateY(-2px);
 }
 
 .buttons {
@@ -63,6 +69,7 @@ button:hover {
 
 .manual-input {
   margin-top: 30px;
+  text-align: left;
 }
 
 .manual-input label {
@@ -84,21 +91,55 @@ button:hover {
 }
 
 #output {
-  margin-top: 30px;
+  margin-top: 25px;
+  background: #1e1e1e;
+  border: 1px solid #f4c7d7;
+  border-radius: 10px;
+  padding: 15px;
 }
 
 #output p {
   font-size: 16px;
+  color: #ddd;
 }
 
 .instructions {
   margin-top: 40px;
   text-align: left;
   font-size: 14px;
-  color: #ccc; /* Light gray */
+  color: #ccc;
 }
 
 .instructions ul {
   list-style-type: disc;
   padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+.instructions pre {
+  background: #111;
+  padding: 10px;
+  border-radius: 8px;
+  overflow-x: auto;
+  border: 1px solid #f4c7d7;
+  color: #f4c7d7;
+  margin-bottom: 10px;
+}
+
+.instructions code {
+  color: #f4c7d7;
+  font-family: monospace;
+}
+
+@media (max-width: 500px) {
+  .container {
+    width: 100%;
+    padding: 20px;
+  }
+  h1 {
+    font-size: 20px;
+  }
+  button {
+    font-size: 14px;
+  }
 }
